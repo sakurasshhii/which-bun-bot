@@ -18,7 +18,6 @@ log_handler.setFormatter(
         )
 logger.addHandler(log_handler)
 
-
 # bot registration
 bot = Bot(token=config.tg_bot.token)
 dp = Dispatcher()
