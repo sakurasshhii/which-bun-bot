@@ -10,7 +10,11 @@ async def main() -> None:
     bot = Bot(config.tg_bot.bot_token)
     dp = Dispatcher()
 
+    
+
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
-asyncio.run(main())
+
+if __name__ == '__main__':
+    asyncio.run(main())
