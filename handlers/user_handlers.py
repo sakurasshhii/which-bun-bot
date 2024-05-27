@@ -27,3 +27,6 @@ async def process_buttons_press(callback: CallbackQuery):
         text=('pressed button 1', 'pressed button 2')[callback.data == 'big_button_2_pressed'],
         reply_markup=callback.message.reply_markup
     )
+    await callback.answer(
+        text='that\'s notification message',
+        show_alert=True)
