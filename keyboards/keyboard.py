@@ -1,16 +1,19 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
-url_button_1 = InlineKeyboardButton(
-    text='Tg bot with python&aiogram',
-    url='https://stepik.org/120924'
+# Создаем объекты инлайн-кнопок
+big_button_1 = InlineKeyboardButton(
+    text='БОЛЬШАЯ КНОПКА 1',
+    callback_data='big_button_1_pressed'
 )
 
-url_button_2 = InlineKeyboardButton(
-    text='Tg Bot API documentation',
-    url='https://core.telegram.org/bots/api'
+big_button_2 = InlineKeyboardButton(
+    text='БОЛЬШАЯ КНОПКА 2',
+    callback_data='big_button_2_pressed'
 )
 
-keyboard_url = InlineKeyboardMarkup(
-    inline_keyboard=[[url_button_1], [url_button_2]]
+# Создаем объект инлайн-клавиатуры
+keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[[big_button_1],
+                     [big_button_2]]
 )

@@ -7,8 +7,6 @@ router = Router()
 
 # all messages except /start and /help
 @router.message()
-async def send_echo(message: Message):
-    try:
-        await message.send_copy(chat_id=message.chat.id)
-    except TypeError:
-        await message.reply(text=LEXICON_EN['no_echo'])
+async def process_all_answer(message: Message):
+    await message.answer('You sent something unexpectable ~e_e~~')
+
