@@ -1,4 +1,7 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+# from lexicon.lexicon import BUTTONS_TEST
+
 
 
 # Создаем объекты инлайн-кнопок
@@ -13,7 +16,7 @@ big_button_2 = InlineKeyboardButton(
 )
 
 # Создаем объект инлайн-клавиатуры
-keyboard = InlineKeyboardMarkup(
+keyboard_1 = InlineKeyboardMarkup(
     inline_keyboard=[[big_button_1],
                      [big_button_2]]
 )

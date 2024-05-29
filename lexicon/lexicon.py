@@ -9,3 +9,8 @@ BUTTONS_TEST: dict[str, str] = {
     'bt2': 'BUTTON 2',
     'bt3': 'BUTTON 3'
 }
+
+BUTTONS_LEXIC: dict[str, str] = {
+    'batt1': 'here 1',
+    'batt2': 'here 2'
+}

@@ -6,17 +6,12 @@ class InlineKeyboardGenerator:
     """helps to create keyboard"""
 
     def __init__(self, lexic: dict):
-        self.lexic = lexic
+        self.lexic = dict(lexic)
 
     def __call__(self, width: int, *bt: str, **kbt: dict) -> InlineKeyboardMarkup:
         keyboard = InlineKeyboardBuilder()
-        buttons: list[InlineKeyboardButton] = []
-        
-        keyboard.row(*self.make_button(buttons, *bt, **kbt), width=width)
-        
-        return keyboard.as_markup()
+        buttons = list()
     
-    def make_button(self, buttons, *bt: str, **kbt: dict) -> list[InlineKeyboardButton]:
         if bt:
             for name in bt:
                 buttons.append(InlineKeyboardButton(
@@ -30,6 +25,11 @@ class InlineKeyboardGenerator:
                     text=name,
                     callback_data=cb_data
                 ))
+
+        keyboard.row(
+            *buttons,
+            width=width
+        )
         
-        return buttons
+        return keyboard.as_markup()
     
