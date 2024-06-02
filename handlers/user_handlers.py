@@ -60,3 +60,12 @@ async def process_next_question(callback: CallbackQuery):
             text=keyboards.test_queue[users[callback.from_user.id]['current']][0],
             reply_markup=keyboards.test_queue[users[callback.from_user.id]['current']][1]
         )
+    else:
+        logger.info(f'user results: {users[callback.from_user.id]["cache"]}')
+        await callback.message.edit_text(
+            text=LEXICON_RU['quest_load']
+        )
+        result = users[callback.from_user.id]['cache'].most_common(1)[0][0]
+        await callback.message.answer(
+            text=LEXICON_RU['quest_end'].format(QUEST_RES[result])
+        )
