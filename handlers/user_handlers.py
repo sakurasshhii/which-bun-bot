@@ -1,8 +1,7 @@
 from aiogram import Router, F
 from aiogram.filters import Command, CommandStart
-from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
+from aiogram.types import Message, CallbackQuery
 from lexicon import *
-from utilities.filters import QuestCallback
 from module.user_data import users
 from collections import Counter
 import keyboards

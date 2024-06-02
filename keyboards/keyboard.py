@@ -1,7 +1,6 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from keyboards.generator import InlineKeyboardGenerator
-from lexicon.data_dict import QUEST
+from lexicon.data_dict import data_convert
 
 
 # Создаем объекты инлайн-кнопок
@@ -20,6 +19,8 @@ keyboard_1 = InlineKeyboardMarkup(
     inline_keyboard=[[big_button_1],
                      [big_button_2]]
 )
+
+QUEST = data_convert('lexicon/data_raw.txt')
 
 test_queue: list[dict[str: list[InlineKeyboardMarkup, ]]] = list()
 for question, answers in QUEST.items():

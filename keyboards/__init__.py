@@ -1,2 +1,2 @@
-from .generator import InlineKeyboardGenerator
 from .keyboard import *
+from .generator import InlineKeyboardGenerator
