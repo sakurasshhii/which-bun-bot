@@ -21,9 +21,7 @@ keyboard_1 = InlineKeyboardMarkup(
                      [big_button_2]]
 )
 
-# list[InlineKeyboardMarkup, ] 
-test_queue = list()
-test_q_queue = list()
+test_queue: list[dict[str: list[InlineKeyboardMarkup, ]]] = list()
 for question, answers in QUEST.items():
     kb = InlineKeyboardBuilder()
     kb.row(*[InlineKeyboardButton(
@@ -33,5 +31,4 @@ for question, answers in QUEST.items():
         ],
         width=1
     )
-    test_queue.append(kb.as_markup())
-    test_q_queue.append(question)
+    test_queue.append((question, kb.as_markup()))
