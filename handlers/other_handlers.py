@@ -1,6 +1,5 @@
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
-from lexicon.lexicon import LEXICON_EN
 import logging
 
 
@@ -10,7 +9,8 @@ router = Router()
 # all messages except /start and /help
 @router.message()
 async def process_all_answer(message: Message):
-    await message.answer('You sent something unexpectable ~e_e~~')
+    logger.error('user sent something')
+    await message.answer()
 
 # missed buttons callback
 @router.callback_query(F.data)

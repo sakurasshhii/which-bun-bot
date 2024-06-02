@@ -29,7 +29,7 @@ async def process_start_command(message: Message):
 # /help
 @router.message(Command(commands='help'))
 async def process_help_command(message: Message):
-    await message.answer(text=LEXICON_EN['/help'])
+    await message.answer(text=LEXICON_RU['/help'])
 
 # quest start
 @router.callback_query(F.data, F.data == 'quest_y')
