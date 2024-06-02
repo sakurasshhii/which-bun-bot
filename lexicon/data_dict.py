@@ -1,17 +1,22 @@
 with open('lexicon/data_raw.txt', 'r', encoding='utf-8') as f:
-    questions = {}
+    QUEST = {}
+    # names = set()
     flag = True
     for line in f.readlines():
         if flag:
             key = line.rstrip()
-            flag, val = False, []
+            flag, val = False, {}
         elif line == '\n':
-            questions.update({key: val})
+            QUEST.update({key: val})
             flag = True
         else:
             txt, res = line.rstrip().split('\\')
-            res = res.split(',')
-            val.append({txt: res})
+            # res = res.split(',')
+            val.update({txt: 'quest,' + res})
+            # names.update(set(res))
+
+# print(QUEST)
+# print(names)
 
 # {question: {
 #     answer1: [

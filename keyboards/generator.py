@@ -3,10 +3,14 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
 class InlineKeyboardGenerator:
-    """helps to create keyboard"""
+    """
+    helps to create keyboard
+    use selected dict to search button text
+    works with kwargs in the same way
+    """
 
-    def __init__(self, lexic: dict):
-        self.lexic = dict(lexic)
+    def __init__(self, lexic: dict = None):
+        self.lexic = dict(lexic) or dict()
 
     def __call__(self, width: int, *bt: str, **kbt: dict) -> InlineKeyboardMarkup:
         keyboard = InlineKeyboardBuilder()
