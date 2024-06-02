@@ -2,10 +2,12 @@ from aiogram import Router, F
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
 from lexicon import *
-from utilities.filters import quest_callback
+from utilities.filters import QuestCallback
 import keyboards
+import logging
 
 
+logger = logging.getLogger(__name__)
 router = Router()
 keyboard = keyboards.InlineKeyboardGenerator(BUTTONS_LEXIC)
 
@@ -24,7 +26,7 @@ async def process_start_command(message: Message):
 async def process_help_command(message: Message):
     await message.answer(text=LEXICON_EN['/help'])
 
-# keyboard button
+# quest start
 @router.callback_query(F.data, F.data == 'quest_y')
 async def process_buttons_press(callback: CallbackQuery):
     await callback.message.edit_text(
@@ -35,7 +37,9 @@ async def process_buttons_press(callback: CallbackQuery):
         reply_markup=keyboards.test_queue[0]
     )
 
-@router.callback_query(quest_callback)
+# quest continious
+@router.callback_query(F.data, F.data.startswith('quest,'))
 async def process_next_question(callback: CallbackQuery):
-    print('catch', callback.data.text)
-    callback.answer()
+    logger.warning(f'your callback data: {callback.data}')
+    keys = QuestCallback().__call__(callback)
+    logger.warning(keys)
