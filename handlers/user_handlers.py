@@ -6,6 +6,8 @@ from module.user_data import users
 from collections import Counter
 import keyboards
 import logging
+from time import sleep
+from random import randint
 
 
 logger = logging.getLogger(__name__)
@@ -30,9 +32,19 @@ async def process_start_command(message: Message):
 async def process_help_command(message: Message):
     await message.answer(text=LEXICON_RU['/help'])
 
+# quest abort
+@router.callback_query(F.data, F.data == 'quest_n')
+async def process_quest_abort(callback: CallbackQuery):
+    await callback.message.edit_text(
+        text=LEXICON_RU['quest_no'],
+        reply_markup=keyboard(
+            1, 'quest_y'
+        )
+    )
+
 # quest start
 @router.callback_query(F.data, F.data == 'quest_y')
-async def process_buttons_press(callback: CallbackQuery):
+async def process_quest_start(callback: CallbackQuery):
     users[callback.from_user.id]['cache'] = Counter()
     users[callback.from_user.id]['current'] = 0
     await callback.message.edit_text(
@@ -50,7 +62,7 @@ async def process_next_question(callback: CallbackQuery):
     users[callback.from_user.id]['cache'].update(
         Counter([c for c in callback.data.split(',') if c in QUEST_RES])
     )
-    logger.warning(f'current user: {callback.from_user.id}\n'\
+    logger.info(f'current user: {callback.from_user.id}\n'\
                    f'cache: {users[callback.from_user.id]["cache"]}')
     
     if users[callback.from_user.id]['current'] < QUEST_LEN - 1:
@@ -62,11 +74,16 @@ async def process_next_question(callback: CallbackQuery):
     else:
         logger.info(f'user results: {users[callback.from_user.id]["cache"]}')
         await callback.message.edit_text(
-            text=LEXICON_RU['quest_load']
+            text=LEXICON_RU['quest_load/1']
         )
+        sleep(1)
+        await callback.message.answer(
+            text=LEXICON_RU['quest_load/2']
+        )
+        sleep(1)
         result = users[callback.from_user.id]['cache'].most_common(1)[0][0]
         await callback.message.answer(
-            text=LEXICON_RU['quest_end'].format(QUEST_RES[result])
+            text=LEXICON_RU['quest_end'].format(randint(4001, 9999), QUEST_RES[result])
         )
         await callback.message.answer_photo(
             photo=PIC_URL[result]
