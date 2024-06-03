@@ -1,20 +1,19 @@
 from aiogram import Router, F
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message, CallbackQuery
-from lexicon import *
-from module.user_data import users
-from collections import Counter
-import keyboards
-import logging
 from time import sleep
 from random import randint
+from collections import Counter
+from lexicon import *
+from module.user_data import users
+import keyboards
+import logging
 
 
 logger = logging.getLogger(__name__)
 router = Router()
 keyboard = keyboards.InlineKeyboardGenerator(BUTTONS_LEXIC)
 
-QUEST_LEN = keyboards.test_queue.__len__()
 
 # /start
 @router.message(CommandStart())
