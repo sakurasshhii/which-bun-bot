@@ -75,8 +75,7 @@ async def process_next_question(callback: CallbackQuery):
         await callback.message.edit_text(
             text=LEXICON_RU['quest_last'],
             reply_markup=keyboard(
-                1, 
-                *[i[0] for i in users[callback.from_user.id]['cache'].most_common(3)]
+                1, *[i[0] for i in users[callback.from_user.id]['cache'].most_common(3)]
             )
         )
 
@@ -95,7 +94,10 @@ async def process_quest_result(callback: CallbackQuery):
     sleep(1)
     result = users[callback.from_user.id]['cache'].most_common(1)[0][0]
     await callback.message.answer(
-        text=LEXICON_RU['quest_end'].format(randint(4001, 9999), QUEST_RES[result])
+        text=LEXICON_RU['quest_end'].format(
+            randint(4001, 9999), 
+            QUEST_RES[result]
+        )
     )
     await callback.message.answer_photo(
         photo=PIC_URL[result]
