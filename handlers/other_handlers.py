@@ -1,5 +1,6 @@
-from aiogram import Router, F
-from aiogram.types import Message, CallbackQuery
+from aiogram import Router
+from aiogram.types import Message
+import lexicon
 import logging
 
 
@@ -10,10 +11,6 @@ router = Router()
 @router.message()
 async def process_all_answer(message: Message):
     logger.error('user sent something')
-    await message.answer()
-
-# missed buttons callback
-@router.callback_query(F.data)
-async def process_all_callbackquery(callback: CallbackQuery):
-    logger.error(f'callback message: {callback.data}')
-    await callback.answer()
+    await message.answer(
+        text=lexicon.LEXICON_RU['unexpected_message'].format(message.text)
+    )
