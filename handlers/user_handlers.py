@@ -68,3 +68,6 @@ async def process_next_question(callback: CallbackQuery):
         await callback.message.answer(
             text=LEXICON_RU['quest_end'].format(QUEST_RES[result])
         )
+        await callback.message.answer_photo(
+            photo=PIC_URL[result]
+        )
