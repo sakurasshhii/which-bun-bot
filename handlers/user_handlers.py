@@ -71,6 +71,9 @@ async def process_next_question(callback: CallbackQuery):
             reply_markup=keyboards.test_queue[users[callback.from_user.id]['current']][1]
         )
     except IndexError:
+        logger.warning(f'old user dict:     {users[callback.from_user.id]["cache"]}')
+        users[callback.from_user.id]['cache'].update(users[callback.from_user.id]['cache'])
+        logger.warning(f'uodated user dict: {users[callback.from_user.id]["cache"]}')
         await callback.message.edit_text(
             text=LEXICON_RU['quest_last'],
             reply_markup=keyboard(

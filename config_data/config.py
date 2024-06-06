@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 from environs import Env
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 @dataclass 
 class TgBot:
@@ -13,6 +16,7 @@ class Config:
 
 
 def load_config(path: str = None) -> Config:
+    logger.info('loading Env()...')
     env = Env()
     env.read_env(path)
     return Config(

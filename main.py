@@ -9,7 +9,7 @@ from keyboards.menu import set_main_menu
 
 logger = logging.getLogger(name=__name__)
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.WARNING,
     format='#%(levelname)s [%(asctime)s] - '\
     '%(filename)s:%(lineno)d - %(message)s'
 )
